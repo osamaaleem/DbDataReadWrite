@@ -1,0 +1,53 @@
+﻿@model IEnumerable<DbDataReadWrite.Models.Employee>
+@{ 
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/Content/bootstrap.css" type="text/css"
+    @*<title>Employee List</title>*@
+</head>
+<body>
+    <div class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">City</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">Salary</th>
+                    <th scope="col">Hire Data</th>
+                    <th scope="col">Department</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Count() > 0)
+                {
+                    foreach (var emp in Model)
+                    {
+                        <tr>
+                            <td scope="row">@emp.EmployeeID</td>
+                            <td>@emp.FirstName</td>
+                            <td>@emp.LastName</td>
+                            <td>@emp.City</td>
+                            <td>@emp.Age</td>
+                            <td>@emp.Salary</td>
+                            <td>@emp.HireDate</td>
+                            <td>@emp.Department.Name</td>
+                        </tr>
+                    }
+                }
+
+            </tbody>
+        </table>
+        @Html.ActionLink("Add Employee", "AddEmp", "Employee",null, new {@class = "btn btn-primary", @role = "button"})
+
+    </div>
+</body>
+</html>
