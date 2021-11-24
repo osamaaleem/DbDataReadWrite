@@ -17,7 +17,8 @@ namespace DbDataReadWrite.DAL
         private SqlConnection sqlConnection = null;
         private SqlCommand sqlCommand = null;
         private string query;
-        SqlDataReader sqlDataReader = null;
+        private SqlDataReader sqlDataReader = null;
+        private int rowsAffected = 0;
         public List<Employee> GetEmployees()
         {
             List<Employee> list = new List<Employee>();
@@ -40,7 +41,6 @@ namespace DbDataReadWrite.DAL
         }
         public int AddEmployee(Employee employee)
         {
-            int rowsAffected = 0;
             try
             {
                 query = "INSERT INTO Employee(emp_fname, emp_lname, City, salary, age, hire_date, departmentID) " +
@@ -78,10 +78,30 @@ namespace DbDataReadWrite.DAL
             }
             return employee;
         }
-        public bool UpdateEmployee(int id)
+        public int UpdateEmployee(int id, Employee employee)
         {
-            query = $"";
-            return false;
+            query = $"UPDATE Employee " +
+                $"SET" +
+                $"emp_fname = {employee.FirstName}" +
+                $"emp_Lname = {employee.LastName}" +
+                $"salary = {employee.Salary}" +
+                $"age = {employee.Age}" +
+                $"hire_date = {employee.HireDate}" +
+                $"city = {employee.City}" +
+                $"departmentID = {employee.Department.DempartmentID}" +
+                $"WHERE emp_id = {id}";
+            sqlConnection.Open();
+            sqlCommand = new SqlCommand(query, sqlConnection);
+            try
+            {
+                rowsAffected = sqlCommand.ExecuteNonQuery();
+                sqlConnection.Close();
+            }
+            catch (Exception ex)
+            {
+                rowsAffected = 0;
+            }
+            return rowsAffected;
         }
     }
 }
