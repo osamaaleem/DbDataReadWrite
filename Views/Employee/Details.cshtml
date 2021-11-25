@@ -54,27 +54,27 @@
                 </tr>
             </thead>
             <tbody>-->
-                @*@if (Model != null && Model.Count() > 0)
-                {
-                    foreach (var emp in Model)
-                    {*@
-                <!--<tr>
-                    <td scope="row">@Model.EmployeeID</td>
-                    <td>@Model.FirstName</td>
-                    <td>@Model.LastName</td>
-                    <td>@Model.City</td>
-                    <td>@Model.Age</td>
-                    <td>@Model.Salary</td>
-                    <td>@Model.HireDate</td>
-                    <td>@Model.Department.Name</td>
-                </tr>-->
-                @*}
-                }*@
+        @*@if (Model != null && Model.Count() > 0)
+            {
+                foreach (var emp in Model)
+                {*@
+        <!--<tr>
+            <td scope="row">@Model.EmployeeID</td>
+            <td>@Model.FirstName</td>
+            <td>@Model.LastName</td>
+            <td>@Model.City</td>
+            <td>@Model.Age</td>
+            <td>@Model.Salary</td>
+            <td>@Model.HireDate</td>
+            <td>@Model.Department.Name</td>
+        </tr>-->
+        @*}
+            }*@
 
-            <!--</tbody>
+        <!--</tbody>
         </table>-->
         @Html.ActionLink("Back to Main Page", "Index", "Employee", null, new { @class = "btn btn-dark", @role = "button" })
-        <br />
     </div>
+    <br />
 </body>
 </html>
