@@ -8,7 +8,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <link rel="stylesheet" href="~/Content/bootstrap.css" type="text/css"
+    <link rel="stylesheet" href="~/Content/bootstrap.css" type="text/css" />
     @*<title>Employee List</title>*@
 </head>
 <body>
@@ -24,6 +24,7 @@
                     <th scope="col">Salary</th>
                     <th scope="col">Hire Data</th>
                     <th scope="col">Department</th>
+                    <th style="text-align:center" scope="col">Options</th>
                 </tr>
             </thead>
             <tbody>
@@ -40,6 +41,11 @@
                             <td>@emp.Salary</td>
                             <td>@emp.HireDate</td>
                             <td>@emp.Department.Name</td>
+                            <td colspan="2">
+                                @Html.ActionLink("Details", "Details", "Employee", new { id = emp.EmployeeID }, new { @class = "btn btn-primary", @role = "button" }) &nbsp
+                                @Html.ActionLink("Edit", "Update", "Employee", new { id = emp.EmployeeID }, new { @class = "btn btn-primary", @role = "button" }) &nbsp
+                                @Html.ActionLink("Delete", "Delete", "Employee", new { id = emp.EmployeeID }, new { @class = "btn btn-primary", @role = "button" }) &nbsp
+                            </td>
                         </tr>
                     }
                 }

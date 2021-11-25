@@ -1,9 +1,7 @@
-﻿using System;
+﻿using DbDataReadWrite.Models;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Data.SqlClient;
-using DbDataReadWrite.Models;
 
 namespace DbDataReadWrite.DAL
 {
@@ -28,15 +26,23 @@ namespace DbDataReadWrite.DAL
             sqlDataReader = sqlCommand.ExecuteReader();
             while (sqlDataReader.Read())
             {
-                list.Add(new Employee {EmployeeID = Convert.ToInt32(sqlDataReader["emp_id"].ToString()),FirstName = sqlDataReader["emp_fname"].ToString(),
+                list.Add(new Employee
+                {
+                    EmployeeID = Convert.ToInt32(sqlDataReader["emp_id"].ToString()),
+                    FirstName = sqlDataReader["emp_fname"].ToString(),
                     LastName = sqlDataReader["emp_Lname"].ToString(),
-                    City = sqlDataReader["City"].ToString(), Salary = Convert.ToDouble(sqlDataReader["salary"].ToString()),
+                    City = sqlDataReader["City"].ToString(),
+                    Salary = Convert.ToDouble(sqlDataReader["salary"].ToString()),
                     Age = Convert.ToInt32(sqlDataReader["age"].ToString()),
                     HireDate = Convert.ToDateTime(sqlDataReader["hire_date"]),
-                    Department = new Department() { DempartmentID = Convert.ToInt32(sqlDataReader["departmentID"].ToString()),
-                    Name = sqlDataReader["depName"].ToString()}
+                    Department = new Department()
+                    {
+                        DempartmentID = Convert.ToInt32(sqlDataReader["departmentID"].ToString()),
+                        Name = sqlDataReader["depName"].ToString()
+                    }
                 });
             }
+            sqlConnection.Close();
             return list;
         }
         public int AddEmployee(Employee employee)
@@ -44,24 +50,25 @@ namespace DbDataReadWrite.DAL
             try
             {
                 query = "INSERT INTO Employee(emp_fname, emp_lname, City, salary, age, hire_date, departmentID) " +
-                    "Values('"+employee.FirstName+ "', '"+employee.LastName+ "', '"+employee.City+ "', '"+employee.Salary+"'," +
-                    "'"+employee.Age+ "','"+employee.HireDate+ "','"+employee.Department.DempartmentID+"')";
+                    "Values('" + employee.FirstName + "', '" + employee.LastName + "', '" + employee.City + "', '" + employee.Salary + "'," +
+                    "'" + employee.Age + "','" + employee.HireDate + "','" + employee.Department.DempartmentID + "')";
                 sqlConnection.Open();
                 sqlCommand = new SqlCommand(query, sqlConnection);
                 rowsAffected = sqlCommand.ExecuteNonQuery();
-                sqlConnection.Close();
             }
             catch (Exception ex)
             {
                 return rowsAffected;
             }
+            sqlConnection.Close();
+
             return rowsAffected;
         }
         public Employee GetEmployeeById(int id)
         {
             query = $"SELECT * FROM Employee emp INNER JOIN Department dep ON emp.departmentID=dep.depID WHERE emp_id = {id}";
             sqlConnection.Open();
-            sqlCommand = new SqlCommand (query, sqlConnection);
+            sqlCommand = new SqlCommand(query, sqlConnection);
             Employee employee = new Employee();
             sqlDataReader = sqlCommand.ExecuteReader();
             while (sqlDataReader.Read())
@@ -73,31 +80,47 @@ namespace DbDataReadWrite.DAL
                 employee.Age = Convert.ToInt32(sqlDataReader["age"].ToString());
                 employee.HireDate = Convert.ToDateTime(sqlDataReader["hire_date"].ToString());
                 employee.City = sqlDataReader["city"].ToString();
-                employee.Department.DempartmentID = Convert.ToInt32(sqlDataReader["departmentID"]);
+                employee.Department = new Department() { DempartmentID = Convert.ToInt32(sqlDataReader["departmentID"]), Name = sqlDataReader["depName"].ToString() };
                 employee.Department.Name = sqlDataReader["depName"].ToString();
             }
+            sqlConnection.Close();
             return employee;
         }
-        public int UpdateEmployee(int id, Employee employee)
+        public int UpdateEmployee(Employee employee)
         {
             query = $"UPDATE Employee " +
-                $"SET" +
-                $"emp_fname = {employee.FirstName}" +
-                $"emp_Lname = {employee.LastName}" +
-                $"salary = {employee.Salary}" +
-                $"age = {employee.Age}" +
-                $"hire_date = {employee.HireDate}" +
-                $"city = {employee.City}" +
+                $"SET " +
+                $"emp_fname = '{employee.FirstName}' ," +
+                $"emp_Lname = '{employee.LastName}' ," +
+                $"salary = '{employee.Salary}' ," +
+                $"age = '{employee.Age}' ," +
+                $"city = '{employee.City}'," +
                 $"departmentID = {employee.Department.DempartmentID}" +
-                $"WHERE emp_id = {id}";
+                $"WHERE emp_id = {employee.EmployeeID}";
             sqlConnection.Open();
             sqlCommand = new SqlCommand(query, sqlConnection);
             try
             {
                 rowsAffected = sqlCommand.ExecuteNonQuery();
-                sqlConnection.Close();
             }
             catch (Exception ex)
+            {
+                rowsAffected = 0;
+            }
+            sqlConnection.Close();
+
+            return rowsAffected;
+        }
+        public int DeleteEmployee(int id)
+        {
+            query = $"DELETE FROM Employee WHERE emp_id = {id}";
+            sqlConnection.Open();
+            sqlCommand = new SqlCommand(query, sqlConnection);
+            try
+            {
+                rowsAffected = sqlCommand.ExecuteNonQuery();
+            }
+            catch(Exception ex)
             {
                 rowsAffected = 0;
             }

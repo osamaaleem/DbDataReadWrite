@@ -25,5 +25,24 @@ namespace DbDataReadWrite.Models
             }
             return depList;
         }
+        public List<SelectListItem> getDepartmentListById(int id)
+        {
+            DepartmentEntity departmentEntity = new DepartmentEntity();
+            List<Department> departmentList = departmentEntity.GetList();
+            List<SelectListItem> depList = new List<SelectListItem>();
+            foreach (Department department in departmentList)
+            {
+                if(department.DempartmentID == id)
+                {
+                    depList.Add(new SelectListItem { Value = department.DempartmentID.ToString(), Text = department.Name, Selected = true });
+                }
+                else
+                {
+                    depList.Add(new SelectListItem { Value = department.DempartmentID.ToString(), Text = department.Name });
+                }
+                
+            }
+            return depList;
+        }
     }
 }
