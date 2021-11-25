@@ -35,6 +35,7 @@ namespace DbDataReadWrite.Models
         [DataType (DataType.Date)]
         [CustomHireDate(ErrorMessage = "Date must be less then or equal today's date")]
         public DateTime HireDate { get; set; }
+        public string ShortHireDate { get; set; }
         public Department Department { get; set; }
         
     }

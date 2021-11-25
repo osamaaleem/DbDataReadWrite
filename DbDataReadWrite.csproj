@@ -133,9 +133,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Bootstrap\bootstrap-grid.css" />
+    <Content Include="Bootstrap\bootstrap-grid.min.css" />
+    <Content Include="Bootstrap\bootstrap-reboot.css" />
+    <Content Include="Bootstrap\bootstrap-reboot.min.css" />
+    <Content Include="Bootstrap\bootstrap.css" />
+    <Content Include="Bootstrap\bootstrap.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
-    <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -143,6 +148,13 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Bootstrap\.DS_Store" />
+    <Content Include="Bootstrap\bootstrap-grid.css.map" />
+    <Content Include="Bootstrap\bootstrap-grid.min.css.map" />
+    <Content Include="Bootstrap\bootstrap-reboot.css.map" />
+    <Content Include="Bootstrap\bootstrap-reboot.min.css.map" />
+    <Content Include="Bootstrap\bootstrap.css.map" />
+    <Content Include="Bootstrap\bootstrap.min.css.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

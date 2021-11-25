@@ -35,6 +35,7 @@ namespace DbDataReadWrite.DAL
                     Salary = Convert.ToDouble(sqlDataReader["salary"].ToString()),
                     Age = Convert.ToInt32(sqlDataReader["age"].ToString()),
                     HireDate = Convert.ToDateTime(sqlDataReader["hire_date"]),
+                    ShortHireDate = Convert.ToDateTime(sqlDataReader["hire_date"]).ToShortDateString(),
                     Department = new Department()
                     {
                         DempartmentID = Convert.ToInt32(sqlDataReader["departmentID"].ToString()),
@@ -79,6 +80,7 @@ namespace DbDataReadWrite.DAL
                 employee.Salary = Convert.ToDouble(sqlDataReader["salary"].ToString());
                 employee.Age = Convert.ToInt32(sqlDataReader["age"].ToString());
                 employee.HireDate = Convert.ToDateTime(sqlDataReader["hire_date"].ToString());
+                employee.ShortHireDate = Convert.ToDateTime(sqlDataReader["hire_date"]).ToShortDateString();
                 employee.City = sqlDataReader["city"].ToString();
                 employee.Department = new Department() { DempartmentID = Convert.ToInt32(sqlDataReader["departmentID"]), Name = sqlDataReader["depName"].ToString() };
                 employee.Department.Name = sqlDataReader["depName"].ToString();

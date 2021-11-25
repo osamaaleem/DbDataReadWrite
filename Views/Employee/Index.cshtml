@@ -8,13 +8,14 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <link rel="stylesheet" href="~/Content/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="~/Bootstrap/bootstrap.css" type="text/css" />
     @*<title>Employee List</title>*@
 </head>
 <body>
+    <br />
     <div class="container">
-        <table class="table">
-            <thead>
+        <table class="table table-striped">
+            <thead class="thead-dark">
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">First Name</th>
@@ -39,12 +40,14 @@
                             <td>@emp.City</td>
                             <td>@emp.Age</td>
                             <td>@emp.Salary</td>
-                            <td>@emp.HireDate</td>
+                            <td>@emp.ShortHireDate</td>
                             <td>@emp.Department.Name</td>
                             <td colspan="2">
-                                @Html.ActionLink("Details", "Details", "Employee", new { id = emp.EmployeeID }, new { @class = "btn btn-primary", @role = "button" }) &nbsp
-                                @Html.ActionLink("Edit", "Update", "Employee", new { id = emp.EmployeeID }, new { @class = "btn btn-primary", @role = "button" }) &nbsp
-                                @Html.ActionLink("Delete", "Delete", "Employee", new { id = emp.EmployeeID }, new { @class = "btn btn-primary", @role = "button" }) &nbsp
+                                <div class="btn-group" role="group">
+                                    @Html.ActionLink("Details", "Details", "Employee", new { id = emp.EmployeeID }, new { @class = "btn btn-dark", @role = "button" })
+                                    @Html.ActionLink("Edit", "Update", "Employee", new { id = emp.EmployeeID }, new { @class = "btn btn-dark", @role = "button" })
+                                    @Html.ActionLink("Delete", "Delete", "Employee", new { id = emp.EmployeeID }, new { @class = "btn btn-dark", @role = "button" })
+                                </div>
                             </td>
                         </tr>
                     }
@@ -52,8 +55,8 @@
 
             </tbody>
         </table>
-        @Html.ActionLink("Add Employee", "AddEmp", "Employee",null, new {@class = "btn btn-primary", @role = "button"})
-
+        @Html.ActionLink("Add Employee", "AddEmp", "Employee",null, new {@class = "btn btn-dark", @role = "button"})
+        <br />
     </div>
 </body>
 </html>
